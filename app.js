@@ -1,4 +1,37 @@
 (() => {
+  const nav = document.querySelector('.nav');
+  const hamburger = document.querySelector('.nav-hamburger');
+  const mobileMenu = document.querySelector('.nav-mobile-menu');
+  const mobileOverlay = document.querySelector('.nav-mobile-overlay');
+  const submenuToggle = document.querySelector('.mobile-submenu-toggle');
+  const mobileSubmenu = document.querySelector('.mobile-submenu');
+
+  const closeMobileMenu = () => {
+    hamburger?.classList.remove('active');
+    hamburger?.setAttribute('aria-expanded', 'false');
+    mobileMenu?.classList.remove('open');
+    mobileOverlay?.classList.remove('open');
+    document.body.classList.remove('menu-open');
+  };
+
+  hamburger?.addEventListener('click', () => {
+    const willOpen = !mobileMenu?.classList.contains('open');
+    hamburger.classList.toggle('active', willOpen);
+    hamburger.setAttribute('aria-expanded', String(willOpen));
+    mobileMenu?.classList.toggle('open', willOpen);
+    mobileOverlay?.classList.toggle('open', willOpen);
+    document.body.classList.toggle('menu-open', willOpen);
+  });
+  mobileOverlay?.addEventListener('click', closeMobileMenu);
+  mobileMenu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMobileMenu));
+  submenuToggle?.addEventListener('click', () => {
+    const willOpen = !mobileSubmenu?.classList.contains('open');
+    mobileSubmenu?.classList.toggle('open', willOpen);
+    submenuToggle.setAttribute('aria-expanded', String(willOpen));
+  });
+  window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', window.scrollY > 10), { passive: true });
+  document.querySelectorAll('[data-footer-year]').forEach((node) => { node.textContent = new Date().getFullYear(); });
+
   const params = new URLSearchParams(window.location.search);
   const requested = params.get('domain') || params.get('s') || 'werwerasfsf.com';
 
