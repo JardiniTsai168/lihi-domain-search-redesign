@@ -6,9 +6,6 @@ const outputDir = "/tmp/lihi-domain-fold-check";
 mkdirSync(outputDir, { recursive: true });
 
 const pages = [
-  ["hub", "index.html", ".version-list"],
-  ["a", "version-a.html?domain=werwerasfsf.com", ".offer-perks"],
-  ["c", "version-c.html?domain=werwerasfsf.com", ".offer-perks"],
   ["d", "version-d.html?domain=werwerasfsf.com", ".offer-perks"],
 ];
 

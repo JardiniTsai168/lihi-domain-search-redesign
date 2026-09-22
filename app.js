@@ -62,17 +62,6 @@
       const field = form.querySelector('input[name="domain"]');
       const next = cleanDomain(field?.value);
 
-      if (document.body.classList.contains('hub-page')) {
-        document.querySelectorAll('[data-version-link]').forEach((link) => {
-          const url = new URL(link.href);
-          url.searchParams.set('domain', next);
-          link.href = url.toString();
-        });
-        field.value = next;
-        showToast(`已將 ${next} 套用到三個版本`);
-        return;
-      }
-
       window.location.search = `?domain=${encodeURIComponent(next)}`;
     });
   });
