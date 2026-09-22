@@ -12,11 +12,15 @@
   const domain = cleanDomain(requested);
   const stem = domain.split('.')[0] || 'yourbrand';
   const suggestions = [`${stem}.tw`, `${stem}.com.tw`, `${stem}.co`];
+  const marketingDomain = `${stem}.link`;
 
   document.querySelectorAll('[data-domain]').forEach((node) => { node.textContent = domain; });
   document.querySelectorAll('[data-domain-value]').forEach((node) => { node.value = domain; });
   document.querySelectorAll('[data-suggestion]').forEach((node, index) => {
     node.textContent = suggestions[index] || `${stem}.net`;
+  });
+  document.querySelectorAll('[data-link-domain]').forEach((node) => {
+    node.textContent = marketingDomain;
   });
 
   document.querySelectorAll('[data-search-form]').forEach((form) => {
@@ -61,7 +65,8 @@
     const count = document.querySelector('[data-bundle-count]');
     const total = document.querySelector('[data-bundle-total]');
     if (count) count.textContent = `${checked.length} 個網域`;
-    if (total) total.textContent = `NT$ ${(checked.length * 399).toLocaleString('zh-TW')}`;
+    const totalPrice = checked.reduce((sum, checkbox) => sum + Number(checkbox.dataset.price || 399), 0);
+    if (total) total.textContent = `NT$ ${totalPrice.toLocaleString('zh-TW')}`;
   }
 
   function showToast(message) {
@@ -78,4 +83,3 @@
     window.__lihiToastTimer = window.setTimeout(() => toast.classList.remove('show'), 2600);
   }
 })();
-
