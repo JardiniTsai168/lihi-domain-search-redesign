@@ -36,7 +36,7 @@
           link.href = url.toString();
         });
         field.value = next;
-        showToast(`已將 ${next} 套用到四個版本`);
+        showToast(`已將 ${next} 套用到三個版本`);
         return;
       }
 
@@ -45,7 +45,11 @@
   });
 
   document.querySelectorAll('[data-register]').forEach((button) => {
-    button.addEventListener('click', () => showToast(`${domain} 已加入註冊清單（原型示意）`));
+    button.addEventListener('click', () => {
+      const hasMarketingDomain = document.querySelector('.domain-row-link input:checked, .perk-selectable input:checked');
+      const selection = hasMarketingDomain ? `${domain} 與 ${marketingDomain}` : domain;
+      showToast(`${selection} 已加入註冊清單（原型示意）`);
+    });
   });
 
   document.querySelectorAll('[data-cart]').forEach((button) => {
@@ -65,7 +69,8 @@
     const count = document.querySelector('[data-bundle-count]');
     const total = document.querySelector('[data-bundle-total]');
     if (count) count.textContent = `${checked.length} 個網域`;
-    const totalPrice = checked.reduce((sum, checkbox) => sum + Number(checkbox.dataset.price || 399), 0);
+    const basePrice = Number(total?.dataset.bundleBase || 0);
+    const totalPrice = basePrice + checked.reduce((sum, checkbox) => sum + Number(checkbox.dataset.price || 399), 0);
     if (total) total.textContent = `NT$ ${totalPrice.toLocaleString('zh-TW')}`;
   }
 

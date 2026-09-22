@@ -8,7 +8,6 @@ mkdirSync(outputDir, { recursive: true });
 const pages = [
   ["hub", "index.html", ".version-list"],
   ["a", "version-a.html?domain=werwerasfsf.com", ".offer-perks"],
-  ["b", "version-b.html?domain=werwerasfsf.com", ".offer-perks"],
   ["c", "version-c.html?domain=werwerasfsf.com", ".offer-perks"],
   ["d", "version-d.html?domain=werwerasfsf.com", ".offer-perks"],
 ];
@@ -59,13 +58,16 @@ for (const [sizeName, width, height, mobile] of viewports) {
       expression: `(() => {
         const element = document.querySelector(${JSON.stringify(selector)});
         const rect = element?.getBoundingClientRect();
+        const addon = document.querySelector('.perk-selectable input[data-bundle-checkbox], .domain-row-link input[data-bundle-checkbox]');
+        if (addon && !addon.checked) addon.click();
         return {
           width: innerWidth,
           height: innerHeight,
           importantBottom: rect ? Math.round(rect.bottom) : null,
           aboveFold: rect ? rect.bottom <= innerHeight : false,
           horizontalOverflow: document.documentElement.scrollWidth > innerWidth,
-          scrollHeight: document.documentElement.scrollHeight
+          scrollHeight: document.documentElement.scrollHeight,
+          addonTotal: document.querySelector('[data-bundle-total]')?.textContent || null
         };
       })()`,
       returnByValue: true,
