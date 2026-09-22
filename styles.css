@@ -205,7 +205,7 @@ body.menu-open { overflow: hidden; }
 .page-d { background: var(--cream); }
 .d-main { max-width: 1180px; margin: 0 auto; padding: 28px 24px 72px; }
 .d-heading { display: flex; justify-content: space-between; gap: 32px; align-items: end; margin: 24px 0 20px; }
-.d-heading h1 { max-width: none; margin: 6px 0 0; color: var(--navy); font-size: clamp(27px, 2.85vw, 37px); line-height: 1.16; letter-spacing: -.035em; white-space: nowrap; }
+.d-heading h1 { max-width: none; margin: 6px 0 0; color: var(--navy); font-size: 28px; line-height: 1.16; letter-spacing: -.035em; white-space: nowrap; }
 .d-heading p { max-width: 340px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
 .d-workspace { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 22px; align-items: start; }
 .domain-table { overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: var(--white); }
